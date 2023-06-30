@@ -5,6 +5,7 @@ language_codes = {
     'spanish': 'es-ES',
     'french': 'fr-FR',
     'italian': 'it-IT',
+    'portuguese': 'pt-PT',
     'german': 'de-DE',
     'japanese': 'ja-JP',
     'korean': 'ko-KR',
