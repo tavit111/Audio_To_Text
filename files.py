@@ -21,3 +21,19 @@ def delete_file(file_path):
         print(f"Permission denied to delete file '{file_path}'.")
     except Exception as e:
         print(f"An error occurred while deleting file '{file_path}': {str(e)}")
+
+
+def write_text_to_file(file_path, text):
+    try:
+        with open(file_path, "w") as file:
+            file.write(text)
+        print(f"Text written to file '{file_path}' successfully.")
+    except FileNotFoundError:
+        print(f"Directory for file '{file_path}' not found.")
+    except IsADirectoryError:
+        print(f"'{file_path}' is a directory, not a file.")
+    except PermissionError:
+        print(f"Permission denied to write to file '{file_path}'.")
+    except Exception as e:
+        print(
+            f"An error occurred while writing text to file '{file_path}': {str(e)}")
