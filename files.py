@@ -1,5 +1,6 @@
 from pydub import AudioSegment
 import os
+import re
 
 
 def convert_mp3_to_wav(mp3_file_path):
@@ -37,3 +38,35 @@ def write_text_to_file(file_path, text):
     except Exception as e:
         print(
             f"An error occurred while writing text to file '{file_path}': {str(e)}")
+
+
+def is_wav_file(file_path):
+    extension = os.path.splitext(file_path)[1].lower()
+    return extension == ".wav"
+
+
+def directory_to_text_file(directory_path):
+    last_directory_name = os.path.basename(os.path.normpath(directory_path))
+    text_file_path = os.path.join(directory_path, last_directory_name)
+    return text_file_path
+
+
+def natural_sort(strings):
+    def convert(text):
+        return int(text) if text.isdigit() else text.lower()
+
+    def alphanum_key(key):
+        return [convert(c) for c in re.split('([0-9]+)', key)]
+
+    sorted_strings = sorted(strings, key=alphanum_key)
+    return sorted_strings
+
+
+def list_files_in_directory(directory_path):
+    file_paths = []
+    files = os.listdir(directory_path)
+    sorted_files = natural_sort(files)
+    for file in sorted_files:
+        file_path = os.path.join(directory_path, file)
+        file_paths.append(file_path)
+    return file_paths
