@@ -2,6 +2,8 @@ import speech_recognition as sr
 
 
 language_codes = {
+    'english': 'en-US',
+    'british': 'en-GB',
     'spanish': 'es-ES',
     'french': 'fr-FR',
     'italian': 'it-IT',
