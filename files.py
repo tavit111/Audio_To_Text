@@ -69,4 +69,6 @@ def list_files_in_directory(directory_path):
     for file in sorted_files:
         file_path = os.path.join(directory_path, file)
         file_paths.append(file_path)
-    return file_paths
+
+    filterd_paths = [path for path in file_paths if not os.path.isdir(path)]
+    return filterd_paths
