@@ -45,6 +45,11 @@ def is_wav_file(file_path):
     return extension == ".wav"
 
 
+def is_mp3_file(file_path):
+    extension = os.path.splitext(file_path)[1].lower()
+    return extension == ".mp3"
+
+
 def directory_to_text_file(directory_path):
     last_directory_name = os.path.basename(os.path.normpath(directory_path))
     text_file_path = os.path.join(directory_path, last_directory_name)
@@ -65,7 +70,9 @@ def natural_sort(strings):
 def list_files_in_directory(directory_path):
     file_paths = []
     files = os.listdir(directory_path)
-    sorted_files = natural_sort(files)
+    filtered_files = [file for file in files if is_mp3_file(
+        file) or is_wav_file(file)]
+    sorted_files = natural_sort(filtered_files)
     for file in sorted_files:
         file_path = os.path.join(directory_path, file)
         file_paths.append(file_path)
