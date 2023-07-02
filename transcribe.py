@@ -18,7 +18,7 @@ language_codes = {
 }
 
 
-def transcribe_audio_file(wav_file_path, language_name):
+def transcribe(wav_file_path, language_name):
     # take 1 wav file  and language in writen format (lowcap: spanish, japanese)
     # return transcyption
     recognizer = sr.Recognizer()

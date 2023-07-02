@@ -1,4 +1,4 @@
-from transcribe import transcribe_audio_file
+from transcribe import transcribe
 from files import convert_mp3_to_wav
 from files import delete_file
 from files import write_text_to_file
@@ -17,7 +17,7 @@ def transcript_audio(audio_path, language_name):
         wav_path = convert_mp3_to_wav(audio_path)
         tempFile = True
 
-    transcription = transcribe_audio_file(wav_path, language_name)
+    transcription = transcribe(wav_path, language_name)
 
     if tempFile:
         delete_file(wav_path)
