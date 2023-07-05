@@ -5,6 +5,7 @@ from files import write_text_to_file
 from files import is_wav_file
 from files import directory_to_text_file
 from files import list_files_in_directory
+from files import list_to_string
 import os
 
 
@@ -42,20 +43,22 @@ def audio_files_to_texts(directory_path, language_name):
         audio_file_to_text(audio_path, language_name)
 
 
-def audio_files_to_text(directory_path, language_name):
+def audio_files_to_text(directory_path, language_name, csv=False):
     # transcribe many audio (mp3, wav) files to one text file each audio file is a new line. Text file with the same directory name
     if not os.path.isdir(directory_path):
         raise Exception("not a directory path")
 
     audio_paths = list_files_in_directory(directory_path)
-    transcription_list = ''
+    # transcription_list will be a list of tuples (transcription, address)
+    transcription_list = []
     for audio_path in audio_paths:
         transcription = transcript_audio(audio_path, language_name)
-        transcription_list += f"{transcription}\n"
+        transcription_list.append((transcription, audio_path))
 
     text_path = directory_to_text_file(directory_path)
-    write_text_to_file(text_path, transcription_list)
+    transcription_string = list_to_string(transcription_list, csv)
+    write_text_to_file(text_path, transcription_string, csv)
 
 
-audio_files_to_texts(
-    '/home/tavit/Code/Audio_To_Text/media/test 2 - result/', 'spanish')
+audio_files_to_text(
+    '/home/tavit/Code/Audio_To_Text/media/test 2 - result/', 'spanish', csv=True)

@@ -24,7 +24,10 @@ def delete_file(file_path):
         print(f"An error occurred while deleting file '{file_path}': {str(e)}")
 
 
-def write_text_to_file(file_path, text):
+def write_text_to_file(file_path, text, csv=False):
+    if csv:
+        file_path += ".csv"
+
     try:
         with open(file_path, "w") as file:
             file.write(text)
@@ -38,6 +41,15 @@ def write_text_to_file(file_path, text):
     except Exception as e:
         print(
             f"An error occurred while writing text to file '{file_path}': {str(e)}")
+
+
+def list_to_string(list, csv=False):
+    text_content = ''
+    for line in list:
+        text_content += line[0]
+        text_content += f",{line[1]}\n" if csv else "\n"
+
+    return text_content
 
 
 def is_wav_file(file_path):
