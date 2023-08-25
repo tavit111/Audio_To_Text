@@ -9,6 +9,28 @@ from files import list_to_string
 import os
 
 
+# TODO: change the file name output to transcipt
+
+
+# LANGUAGES AVAILABLE
+# 'english'
+# 'british'
+# 'spanish'
+# 'french'
+# 'italian'
+# 'portuguese'
+# 'german'
+# 'japanese'
+# 'korean'
+# 'indonesian'
+# 'russian'
+# 'chinese'
+# 'swedish'
+
+# SETTING
+lang_setting = 'japanese'
+
+
 def transcript_audio(audio_path, language_name):
     # transcribe audio file (mp3, wav) and return the text
     tempFile = False
@@ -60,5 +82,5 @@ def audio_files_to_text(directory_path, language_name, csv=False):
     write_text_to_file(text_path, transcription_string, csv)
 
 
-audio_files_to_text(
-    '/home/tavit/Code/Audio_To_Text/media/test 2 - result/', 'spanish', csv=True)
+audio_file_to_text(
+    '/home/tavit/Code/Audio_To_Text/media/1.mp3', lang_setting)

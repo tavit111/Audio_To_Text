@@ -30,7 +30,26 @@ def transcribe(wav_file_path, language_name):
     transcript = ""
     try:
         transcript = recognizer.recognize_google(
-            audio, language=language_code)
+            audio, language=language_code, show_all=False)
+    except sr.UnknownValueError:
+        print("Google Speech Recognition could not understand the audio.")
+    except sr.RequestError:
+        print("Could not request results from Google Speech Recognition service.")
+
+    return transcript
+
+
+def transcribeSegment(segment, language_name):
+    # take 1 wav file  and language in writen format (lowcap: spanish, japanese)
+    # return transcyption
+    raw_data = segment.raw_data
+    recognizer = sr.Recognizer()
+    language_code = language_codes[language_name]
+
+    transcript = ""
+    try:
+        transcript = recognizer.recognize_google(
+            raw_data, language=language_code, show_all=False)
     except sr.UnknownValueError:
         print("Google Speech Recognition could not understand the audio.")
     except sr.RequestError:
